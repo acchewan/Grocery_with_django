@@ -5,13 +5,19 @@ from .models import GroceryItem
 class GroceryItemForm(forms.ModelForm):
     class Meta:
         model = GroceryItem
-        fields = ['name']
+        fields = ['name', 'due_date']
         widgets = {
             'name': forms.TextInput(
                 attrs={
                     'class': 'form-input',
-                    'placeholder': 'e.g. eggs',
+                    'placeholder': 'e.g. Buy milk',
                     'required': True,
+                }
+            ),
+            'due_date': forms.DateInput(
+                attrs={
+                    'type': 'date',
+                    'class': 'form-input',
                 }
             ),
         }

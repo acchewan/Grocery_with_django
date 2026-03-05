@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Grocery Bud - Django</title>
+    <title>Todo - Django</title>
 
     <link
       rel="stylesheet"
@@ -28,9 +28,9 @@
         action="{% if edit_item %}{% url 'grocery:update' edit_item.id %}{% else %}{% url 'grocery:add' %}{% endif %}"
       >
         {% csrf_token %}
-        <h2>grocery bud</h2>
+        <h2>todo list</h2>
         <div class="form-control">
-          {{ form.name }}
+          {{ form.name }} {{ form.due_date }}
           <button type="submit" class="btn">
             {% if edit_item %}edit item{% else %}add item{% endif %}
           </button>
@@ -69,7 +69,9 @@
 
           <!-- Item Name -->
           <p class="item-name {% if item.completed %}completed{% endif %}">
-            {{ item.name }}
+            {{ item.name }} {% if item.due_date %}<span class="due-date"
+              >(Due: {{ item.due_date }})</span
+            >{% endif %}
           </p>
 
           <!-- Edit Button -->
