@@ -1,40 +1,93 @@
+form {
+  margin-bottom: 2.5rem;
+}
+
 form h2 {
   text-align: center;
-  margin-bottom: 1.5rem;
-  text-transform: capitalize;
-  font-weight: normal;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.02em;
 }
 
 .form-control {
   display: grid;
-  grid-template-columns: 1fr 100px;
+  grid-template-columns: 1fr 1fr auto;
+  column-gap: 1rem;
+  row-gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .form-control {
+    grid-template-columns: 1fr;
+  }
 }
 
 .form-input {
   width: 100%;
-  padding: 0.375rem 0.75rem;
-  border-radius: 0;
-  border-top-left-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
-  border: 1px solid #ddd;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 2px solid var(--border);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: var(--white);
+  color: var(--text);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
 }
 
 .form-input::placeholder {
-  color: #aaa;
+  color: var(--text-light);
+}
+
+.form-input[type="date"] {
+  cursor: pointer;
 }
 
 .form-control .btn {
   cursor: pointer;
-  color: #fff;
-  background: #06b6d4;
-  border: transparent;
-  border-radius: 0;
-  border-top-right-radius: 0.25rem;
-  border-bottom-right-radius: 0.25rem;
-  padding: 0.375rem 0.75rem;
+  color: var(--white);
+  background: var(--primary);
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
   text-transform: capitalize;
+  transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .form-control .btn:hover {
-  background: #0e7490;
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.form-control .btn:active {
+  transform: translateY(0);
+}
+
+.form-errors {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #fee2e2;
+  border-radius: 0.75rem;
+  border-left: 4px solid var(--error);
+}
+
+.form-errors .error {
+  color: #991b1b;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-errors .error:last-child {
+  margin-bottom: 0;
 }
