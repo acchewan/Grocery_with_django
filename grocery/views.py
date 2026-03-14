@@ -74,4 +74,5 @@ def delete_item(request, item_id):
 
 def edit_item(request, item_id):
     """Redirect to index with edit parameter"""
-    return redirect('grocery:index', edit_id=item_id)
+    from django.urls import reverse
+    return redirect(f"{reverse('grocery:index')}?edit={item_id}")
