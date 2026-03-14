@@ -72,6 +72,14 @@ def delete_item(request, item_id):
     return redirect('grocery:index')
 
 
+def clear_all(request):
+    """Delete all grocery items"""
+    if request.method == 'POST':
+        GroceryItem.objects.all().delete()
+        messages.success(request, 'All Items Cleared!')
+    return redirect('grocery:index')
+
+
 def edit_item(request, item_id):
     """Redirect to index with edit parameter"""
     from django.urls import reverse

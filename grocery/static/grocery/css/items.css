@@ -12,6 +12,40 @@
   font-size: 1rem;
 }
 
+.items-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--grey-200);
+}
+
+.items-count {
+  font-size: 0.85rem;
+  color: var(--grey-500);
+  background: var(--grey-100);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--borderRadius);
+  font-weight: 500;
+}
+
+.clear-btn {
+  background: transparent;
+  border: none;
+  color: var(--red-dark);
+  cursor: pointer;
+  font-size: 0.85rem;
+  letter-spacing: var(--letterSpacing);
+  transition: var(--transition);
+  text-transform: capitalize;
+}
+
+.clear-btn:hover {
+  color: var(--red-light);
+  text-decoration: underline;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

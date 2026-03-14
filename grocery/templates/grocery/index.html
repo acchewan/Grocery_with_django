@@ -46,6 +46,15 @@
 
       <!-- Items List -->
       <div class="items">
+        {% if items %}
+        <div class="items-header">
+           <span class="items-count">{{ items.count }} item{{ items.count|pluralize }}</span>
+           <form method="POST" action="{% url 'grocery:clear_all' %}" style="margin:0">
+              {% csrf_token %}
+              <button type="submit" class="clear-btn" onclick="return confirm('Clear all items?')">Clear All</button>
+           </form>
+        </div>
+        {% endif %}
         {% for item in items %}
         <div class="single-item">
           <!-- Toggle Completed -->
