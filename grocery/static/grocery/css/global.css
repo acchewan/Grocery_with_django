@@ -7,67 +7,76 @@
 }
 
 :root {
-  --primary: #06b6d4;
-  --primary-dark: #0891b2;
-  --primary-light: #cffafe;
-  --bg: #f9fafb;
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --primary-light: #e0e7ff;
+  --bg-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
   --white: #ffffff;
-  --text: #1f2937;
-  --text-light: #6b7280;
-  --border: #e5e7eb;
+  --text: #0f172a;
+  --text-light: #64748b;
+  --border: rgba(255, 255, 255, 0.2);
   --success: #10b981;
   --error: #ef4444;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.5);
 }
 
 body {
-  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-    Arial, sans-serif;
+  background: var(--bg-gradient);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-weight: 400;
   line-height: 1.6;
   color: var(--text);
   min-height: 100vh;
-  padding: 2rem 1rem;
+  padding: 4rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .section-center {
   margin: 0 auto;
-  max-width: 40rem;
-  background: var(--white);
-  border-radius: 1.5rem;
-  padding: 2.5rem;
+  width: 90vw;
+  max-width: 45rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 2rem;
+  padding: 3rem;
   position: relative;
   box-shadow: var(--shadow-lg);
 }
 
 .alert {
-  padding: 1rem 1.25rem;
-  margin-bottom: 1.5rem;
-  border-radius: 0.75rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
   text-align: center;
-  font-weight: 500;
-  animation: slideDown 0.3s ease-out;
+  font-weight: 600;
+  font-size: 0.95rem;
+  animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow);
 }
 
 .alert-success {
-  background: #d1fae5;
+  background: rgba(16, 185, 129, 0.1);
   color: #065f46;
-  border-left: 4px solid var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 .alert-error {
-  background: #fee2e2;
+  background: rgba(239, 68, 68, 0.1);
   color: #991b1b;
-  border-left: 4px solid var(--error);
+  border: 1px solid rgba(239, 68, 68, 0.2);
 }
 
 @keyframes slideDown {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-20px);
   }
   to {
     opacity: 1;
@@ -77,15 +86,64 @@ body {
 
 @media (max-width: 640px) {
   .section-center {
-    padding: 1.5rem;
-    border-radius: 1rem;
+    padding: 2rem 1.5rem;
+    border-radius: 1.5rem;
+  }
+  body {
+    padding: 2rem 1rem;
   }
 }
 
 .footer {
-  margin-top: 2rem;
+  margin-top: 3rem;
   text-align: center;
-  color: var(--text-light);
-  font-size: 0.85rem;
-  letter-spacing: var(--letterSpacing);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.logo-icon {
+  font-size: 3rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+  display: inline-flex;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  padding: 1.5rem;
+  border-radius: 2rem;
+  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
+}
+
+.app-header h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text);
+  margin-top: 1rem;
+}
+
+.bg-decoration {
+  position: fixed;
+  top: -10%;
+  right: -5%;
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.bg-decoration::before {
+  content: "";
+  position: absolute;
+  bottom: -20%;
+  left: -30%;
+  width: 30vw;
+  height: 30vw;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
 }

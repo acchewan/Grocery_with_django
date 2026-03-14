@@ -1,56 +1,106 @@
 .items {
-  margin-top: 2rem;
-  display: grid;
-  row-gap: 1rem;
-  animation: fadeIn 0.4s ease-out;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .items p[style*="text-align: center"] {
   text-align: center;
-  color: var(--text-light);
-  padding: 2rem 1rem;
-  font-size: 1rem;
+  color: #64748b;
+  padding: 3rem 1rem;
+  font-size: 1.1rem;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 1.5rem;
+  border: 1px dashed var(--glass-border);
 }
 
 .items-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--grey-200);
+  margin-bottom: 1.5rem;
+  padding: 0 0.5rem 1rem 0.5rem;
+  border-bottom: 1px solid var(--glass-border);
 }
 
 .items-count {
-  font-size: 0.85rem;
-  color: var(--grey-500);
-  background: var(--grey-100);
-  padding: 0.2rem 0.6rem;
-  border-radius: var(--borderRadius);
-  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 0.35rem 0.85rem;
+  border-radius: 2rem;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(99, 102, 241, 0.1);
 }
 
 .clear-btn {
-  background: transparent;
-  border: none;
-  color: var(--red-dark);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: var(--error);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
   cursor: pointer;
   font-size: 0.85rem;
-  letter-spacing: var(--letterSpacing);
-  transition: var(--transition);
+  font-weight: 600;
+  transition: all 0.3s ease;
   text-transform: capitalize;
 }
 
 .clear-btn:hover {
-  color: var(--red-light);
-  text-decoration: underline;
+  background: var(--error);
+  color: var(--white);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(239, 68, 68, 0.2);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 1.5rem;
+  border: 1px dashed var(--glass-border);
+  color: var(--text-light);
+}
+
+.empty-state i {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.3;
+  color: var(--primary);
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.item-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }

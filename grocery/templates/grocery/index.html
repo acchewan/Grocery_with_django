@@ -16,30 +16,47 @@
     <link rel="stylesheet" href="{% static 'grocery/css/form.css' %}" />
   </head>
   <body>
+    <!-- Background Decoration -->
+    <div class="bg-decoration"></div>
+    
     <section class="section-center">
+      <!-- Header / Logo -->
+      <header class="app-header">
+        <div class="logo-icon"><i class="fa-solid fa-basket-shopping"></i></div>
+        <h1>Grocery Bud</h1>
+      </header>
+
       <!-- Messages -->
-      {% if messages %} {% for message in messages %}
-      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-      {% endfor %} {% endif %}
+      {% if messages %} 
+      <div class="messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
 
       <!-- Add / Edit Form -->
       <form
         method="POST"
         action="{% if edit_item %}{% url 'grocery:update' edit_item.id %}{% else %}{% url 'grocery:add' %}{% endif %}"
+        class="main-form"
       >
         {% csrf_token %}
-        <h2>todo list</h2>
+        <h2>{% if edit_item %}Update Item{% else %}Add to List{% endif %}</h2>
         <div class="form-control">
-          {{ form.name }} {{ form.due_date }}
+          {{ form.name }} 
+          {{ form.due_date }}
           <button type="submit" class="btn">
-            {% if edit_item %}edit item{% else %}add item{% endif %}
+            {% if edit_item %}Update{% else %}Add Item{% endif %}
           </button>
         </div>
         {% if form.errors %}
         <div class="form-errors">
-          {% for field, errors in form.errors.items %} {% for error in errors %}
-          <p class="error">{{ error }}</p>
-          {% endfor %} {% endfor %}
+          {% for field, errors in form.errors.items %} 
+            {% for error in errors %}
+            <p class="error">{{ error }}</p>
+            {% endfor %} 
+          {% endfor %}
         </div>
         {% endif %}
       </form>
@@ -51,68 +68,75 @@
            <span class="items-count">{{ items.count }} item{{ items.count|pluralize }}</span>
            <form method="POST" action="{% url 'grocery:clear_all' %}" style="margin:0">
               {% csrf_token %}
-              <button type="submit" class="clear-btn" onclick="return confirm('Clear all items?')">Clear All</button>
+              <button type="submit" class="clear-btn" onclick="return confirm('Format: Clear all items?')">Clear All</button>
            </form>
         </div>
         {% endif %}
-        {% for item in items %}
-        <div class="single-item">
-          <!-- Toggle Completed -->
-          <form
-            method="POST"
-            action="{% url 'grocery:toggle' item.id %}"
-            style="display: inline"
-          >
-            {% csrf_token %}
-            <input
-              type="checkbox"
-              {%
-              if
-              item.completed
-              %}checked{%
-              endif
-              %}
-              onchange="this.form.submit()"
-            />
-          </form>
+        
+        <div class="items-list">
+          {% for item in items %}
+          <div class="single-item" style="animation-delay: {{ forloop.counter0|add:0.1 }}s">
+            <!-- Toggle Completed -->
+            <form
+              method="POST"
+              action="{% url 'grocery:toggle' item.id %}"
+              style="display: inline"
+              class="toggle-form"
+            >
+              {% csrf_token %}
+              <input
+                type="checkbox"
+                {% if item.completed %}checked{% endif %}
+                onchange="this.form.submit()"
+              />
+            </form>
 
-          <!-- Item Name -->
-          <p class="item-name {% if item.completed %}completed{% endif %}">
-            {{ item.name }} {% if item.due_date %}<span class="due-date"
-              >(Due: {{ item.due_date }})</span
-            >{% endif %}
-          </p>
+            <!-- Item Name -->
+            <div class="item-info">
+              <p class="item-name {% if item.completed %}completed{% endif %}">
+                {{ item.name }}
+              </p>
+              {% if item.due_date %}
+              <span class="due-date">
+                <i class="fa-regular fa-calendar"></i> {{ item.due_date }}
+              </span>
+              {% endif %}
+            </div>
 
-          <!-- Edit Button -->
-          <a
-            href="{% url 'grocery:edit' item.id %}"
-            class="btn icon-btn edit-btn"
-          >
-            <i class="fa-regular fa-pen-to-square"></i>
-          </a>
+            <!-- Actions -->
+            <div class="item-actions">
+              <a
+                href="{% url 'grocery:edit' item.id %}"
+                class="btn icon-btn edit-btn"
+                title="Edit Item"
+              >
+                <i class="fa-regular fa-pen-to-square"></i>
+              </a>
 
-          <!-- Delete Button -->
-          <form
-            method="POST"
-            action="{% url 'grocery:delete' item.id %}"
-            style="display: inline"
-          >
-            {% csrf_token %}
-            <button type="submit" class="btn icon-btn remove-btn">
-              <i class="fa-regular fa-trash-can"></i>
-            </button>
-          </form>
+              <form
+                method="POST"
+                action="{% url 'grocery:delete' item.id %}"
+                style="display: inline"
+              >
+                {% csrf_token %}
+                <button type="submit" class="btn icon-btn remove-btn" title="Delete Item">
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+          {% empty %}
+          <div class="empty-state">
+            <i class="fa-solid fa-clipboard-list"></i>
+            <p>Your list is empty. Start adding items!</p>
+          </div>
+          {% endfor %}
         </div>
-        {% empty %}
-        <p style="text-align: center; color: #888">
-          No items yet. Add one above!
-        </p>
-        {% endfor %}
       </div>
     </section>
     
     <footer class="footer">
-      <p>&copy; {% now "Y" %} Grocery Bud. Last updated: {% now "M d, Y" %}</p>
+      <p>&copy; {% now "Y" %} Grocery Bud • Made with <i class="fa-solid fa-heart" style="color: #ef4444;"></i></p>
     </footer>
   </body>
 </html>
